@@ -1,2 +1,2 @@
 # pycharm_test
-本地pycharm测试项目合集
+本地测试项目合集
