@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinema Management System</title>
+    <!-- 引入animate.css -->
+    <link rel="stylesheet" href="node_modules/animate.css/animate.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('cinema_background.jpg'); /* 替换为你的背景图片URL */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #fff;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #000;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            animation: pulse 1s infinite;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            animation: fadeIn 0.5s;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            animation: slideIn 0.5s;
+        }
+        .modal-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .modal-close:hover,
+        .modal-close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* 动画效果 */
+        @keyframes pulse {
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+                @keyframes slideIn {
+            from {transform: translateY(-100%);}
+            to {transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+    <h1>Cinema Management System</h1>
+
+    <h2>All Movies</h2>
+    <button onclick="fetchMovies()">Fetch Movies</button>
+    <div id="moviesTableContainer"></div>
+
+    <h2>Customer Ticket Records</h2>
+    <div class="form-group">
+        <label for="customerId">Customer ID:</label>
+        <input type="number" id="customerId">
+        <button onclick="fetchCustomerTickets()">Search</button>
+    </div>
+    <div id="customerTicketsTableContainer"></div>
+
+    <h2>Update Screening Status</h2>
+    <div class="form-group">
+        <label for="screeningId">Screening ID:</label>
+        <input type="number" id="screeningId">
+        <label for="screeningStatus">Status:</label>
+        <input type="text" id="screeningStatus">
+        <button onclick="updateScreeningStatus()">Update</button>
+    </div>
+
+    <h2>Delete Customer Ticket</h2>
+    <div class="form-group">
+        <label for="ticketId">Ticket ID:</label>
+        <input type="number" id="ticketId">
+        <button onclick="deleteCustomerTicket()">Delete</button>
+    </div>
+
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <p id="errorMessage"></p >
+        </div>
+    </div>
+
+    <script>
+        // 获取所有电影信息
+        function fetchMovies() {
+            fetch('/api/movies')
+                .then(response => response.json())
+                .then(data => populateMoviesTable(data))
+                .catch(error => {
+                    showErrorModal('Error fetching movies: ' + error);
+                });
+        }
+
+        // 填充电影信息表格
+        function populateMoviesTable(movies) {
+            const tableContainer = document.getElementById('moviesTableContainer');
+            tableContainer.innerHTML = '<table id="moviesTable"><tr><th>Movie ID</th><th>Movie Name</th><th>Director</th><th>Cast</th><th>Genre</th><th>Release Date</th><th>Duration</th></tr></table>';
+            const table = tableContainer.querySelector('#moviesTable');
+            movies.forEach(movie => {
+                let row = table.insertRow();
+                row.insertCell().textContent = movie.movie_id;
+                row.insertCell().textContent = movie.movie_name;
+                row.insertCell().textContent = movie.director;
+                row.insertCell().textContent = movie.cast;
+                row.insertCell().textContent = movie.genre;
+                row.insertCell().textContent = movie.release_date;
+                row.insertCell().textContent = movie.duration;
+            });
+        }
+
+        // 获取顾客购票记录
+        function fetchCustomerTickets() {
+            const customerId = document.getElementById('customerId').value;
+            fetch(`/api/customer_tickets/${customerId}`)
+                .then(response => response.json())
+                .then(data => populateCustomerTicketsTable(data))
+                .catch(error => {
+                    showErrorModal('Error fetching customer tickets: ' + error);
+                });
+        }
+
+        // 填充顾客购票记录表格
+        function populateCustomerTicketsTable(tickets) {
+            const tableContainer = document.getElementById('customerTicketsTableContainer');
+            tableContainer.innerHTML = '<table id="customerTicketsTable"><tr><th>Movie Name</th><th>Screening Time</th><th>Seat Number</th></tr></table>';
+                            const table = tableContainer.querySelector('#customerTicketsTable');
+                tickets.forEach(ticket => {
+                    let row = table.insertRow();
+                    row.insertCell().textContent = ticket.movie_name;
+                    row.insertCell().textContent = ticket.screening_time;
+                    row.insertCell().textContent = ticket.seat_number;
+                });
+            }
+
+            // 更新放映状态
+            function updateScreeningStatus() {
+                const screeningId = document.getElementById('screeningId').value;
+                const screeningStatus = document.getElementById('screeningStatus').value;
+                fetch(`/api/screening_status/${screeningId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: screeningStatus })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        showErrorModal('Error updating status: ' + data.error);
+                    } else {
+                        alert('Status updated successfully');
+                    }
+                })
+                .catch(error => {
+                    showErrorModal('Error updating status: ' + error);
+                });
+            }
+
+            // 删除顾客购票记录
+            function deleteCustomerTicket() {
+                const ticketId = document.getElementById('ticketId').value;
+                fetch(`/api/ticket/${ticketId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        showErrorModal('Error deleting ticket: ' + data.error);
+                    } else {
+                        alert('Ticket deleted successfully');
+                    }
+                })
+                .catch(error => {
+                    showErrorModal('Error deleting ticket: ' + error);
+                });
+            }
+
+            // 显示错误模态框
+            function showErrorModal(message) {
+                const errorModal = document.getElementById('errorModal');
+                errorModal.style.display = 'block';
+                const errorMessage = document.getElementById('errorMessage');
+                errorMessage.textContent = message;
+                const closeButton = errorModal.querySelector('.modal-close');
+                closeButton.onclick = function() {
+                    errorModal.style.display = 'none';
+                };
+            }
+
+            // 页面加载时获取所有电影信息
+            window.onload = fetchMovies;
+        </script>
+    </body>
+</html>

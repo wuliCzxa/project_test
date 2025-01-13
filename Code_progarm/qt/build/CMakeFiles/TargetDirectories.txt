@@ -1,0 +1,4 @@
+E:/Software/Code_progarm/qt/build/CMakeFiles/mangemen.dir
+E:/Software/Code_progarm/qt/build/CMakeFiles/edit_cache.dir
+E:/Software/Code_progarm/qt/build/CMakeFiles/rebuild_cache.dir
+E:/Software/Code_progarm/qt/build/CMakeFiles/mangemen_autogen.dir

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电影管理</title>
+    <!-- 引入Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- 引入animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- 自定义样式 -->
+    <style>
+        body {
+            background-image: url('/static/cinema_background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Arial', sans-serif;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            margin: 50px auto;
+        }
+        .btn-primary {
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">电影管理</h2>
+        <button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#addMovieModal">添加电影</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>电影ID</th>
+                    <th>电影名称</th>
+                    <th>导演</th>
+                    <th>演员</th>
+                    <th>类型</th>
+                    <th>上映日期</th>
+                    <th>时长</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                    <tr>
+                        <td>{{ movie.movie_id }}</td>
+                        <td>{{ movie.movie_name }}</td>
+                        <td>{{ movie.director }}</td>
+                        <td>{{ movie.cast }}</td>
+                        <td>{{ movie.gengre }}</td>
+                        <td>{{ movie.release_date }}</td>
+                        <td>{{ movie.duration }}</td>
+                        <td>
+                            <button type="button" class="btn btn-info btn-sm edit-movie" data-id="{{ movie.movie_id }}">编辑</button>
+                            <button type="button" class="btn btn-danger btn-sm delete-movie" data-id="{{ movie.movie_id }}">删除</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 添加电影模态框 -->
+    <div class="modal fade" id="addMovieModal" tabindex="-1" role="dialog" aria-labelledby="addMovieModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                                            <h5 class="modal-title" id="addMovieModalLabel">添加电影</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="movie-name">电影名称</label>
+                                <input type="text" class="form-control" id="movie-name" name="movie-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="director">导演</label>
+                                <input type="text" class="form-control" id="director" name="director" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cast">演员</label>
+                                <input type="text" class="form-control" id="cast" name="cast" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gengre">类型</label>
+                                <input type="text" class="form-control" id="gengre" name="gengre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="release-date">上映日期</label>
+                                <input type="text" class="form-control" id="release-date" name="release-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="duration">时长</label>
+                                <input type="number" class="form-control" id="duration" name="duration" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">添加</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑电影模态框 -->
+    <div class="modal fade" id="editMovieModal" tabindex="-1" role="dialog" aria-labelledby="editMovieModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editMovieModalLabel">编辑电影</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="edit-movie-name">电影名称</label>
+                            <input type="text" class="form-control" id="edit-movie-name" name="edit-movie-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-director">导演</label>
+                            <input type="text" class="form-control" id="edit-director" name="edit-director" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-cast">演员</label>
+                            <input type="text" class="form-control" id="edit-cast" name="edit-cast" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-gengre">类型</label>
+                            <input type="text" class="form-control" id="edit-gengre" name="edit-gengre" required>
+                        </div>
+                                                <div class="form-group">
+                            <label for="edit-release-date">上映日期</label>
+                            <input type="date" class="form-control" id="edit-release-date" name="edit-release-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-duration">时长</label>
+                            <input type="number" class="form-control" id="edit-duration" name="edit-duration" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.5/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

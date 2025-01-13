@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinema Management System</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cinema Management System</h1>
+
+    <!-- 查询所有电影信息 -->
+    <h2>All Movies</h2>
+    <button onclick="fetchMovies()">Fetch Movies</button>
+    <table id="moviesTable">
+        <tr>
+            <th>Movie ID</th>
+            <th>Movie Name</th>
+            <th>Director</th>
+            <th>Cast</th>
+            <th>Genre</th>
+            <th>Release Date</th>
+            <th>Duration</th>
+        </tr>
+        <!-- 电影数据将通过JavaScript动态填充 -->
+    </table>
+
+    <!-- 查询顾客购票记录 -->
+    <h2>Customer Ticket Records</h2>
+    <label for="customerId">Customer ID:</label>
+    <input type="number" id="customerId">
+    <button onclick="fetchCustomerTickets()">Search</button>
+    <table id="customerTicketsTable">
+        <tr>
+            <th>Movie Name</th>
+            <th>Screening Time</th>
+            <th>Seat Number</th>
+        </tr>
+        <!-- 购票记录数据将通过JavaScript动态填充 -->
+    </table>
+
+    <!-- 更新放映状态 -->
+    <h2>Update Screening Status</h2>
+    <label for="screeningId">Screening ID:</label>
+    <input type="number" id="screeningId">
+    <label for="screeningStatus">Status:</label>
+    <input type="text" id="screeningStatus">
+    <button onclick="updateScreeningStatus()">Update</button>
+
+    <!-- 删除顾客购票记录 -->
+    <h2>Delete Customer Ticket</h2>
+    <label for="ticketId">Ticket ID:</label>
+    <input type="number" id="ticketId">
+    <button onclick="deleteCustomerTicket()">Delete</button>
+
+    <script>
+        // 获取所有电影信息
+        function fetchMovies() {
+            fetch('/api/movies')
+                .then(response => response.json())
+                .then(data => populateMoviesTable(data));
+        }
+
+        // 填充电影信息表格
+        function populateMoviesTable(movies) {
+            const table = document.getElementById('moviesTable');
+            table.innerHTML = '<tr><th>Movie ID</th><th>Movie Name</th><th>Director</th><th>Cast</th><th>Genre</th><th>Release Date</th><th>Duration</th></tr>';
+            movies.forEach(movie => {
+                let row = table.insertRow();
+                row.insertCell().textContent = movie.movie_id;
+                row.insertCell().textContent = movie.movie_name;
+                row.insertCell().textContent = movie.director;
+                row.insertCell().textContent = movie.cast;
+                row.insertCell().textContent = movie.genre;
+                row.insertCell().textContent = movie.release_date;
+                row.insertCell().textContent = movie.duration;
+            });
+        }
+
+        // 获取顾客购票记录
+        function fetchCustomerTickets() {
+            const customerId = document.getElementById('customerId').value;
+            fetch(`/api/customer_tickets/${customerId}`)
+                .then(response => response.json())
+                .then(data => populateCustomerTicketsTable(data));
+        }
+
+        // 填充顾客购票记录表格
+        function populateCustomerTicketsTable(tickets) {
+            const table = document.getElementById('customerTicketsTable');
+            table.innerHTML = '<tr><th>Movie Name</th><th>Screening Time</th><th>Seat Number</th></tr>';
+            tickets.forEach(ticket => {
+                let row = table.insertRow();
+                row.insertCell().textContent = ticket.movie_name;
+                row.insertCell().textContent = ticket.screening_time;
+                row.insertCell().textContent = ticket.seat_number;
+            });
+        }
+
+                // 更新放映状态
+        function updateScreeningStatus() {
+            const screeningId = document.getElementById('screeningId').value;
+            const screeningStatus = document.getElementById('screeningStatus').value;
+            fetch(`/api/screening_status/${screeningId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status: screeningStatus })
+            })
+            .then(response => response.json())
+            .then(data => alert('Status updated successfully'));
+        }
+
+        // 删除顾客购票记录
+        function deleteCustomerTicket() {
+            const ticketId = document.getElementById('ticketId').value;
+            fetch(`/api/ticket/${ticketId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => alert('Ticket deleted successfully'));
+        }
+
+        // 页面加载时获取所有电影信息
+        window.onload = fetchMovies;
+    </script>
+</body>
+</html>

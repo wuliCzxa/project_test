@@ -1,0 +1,123 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>注册</title>-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">-->
+<!--    <style>-->
+<!--        body {-->
+<!--            background-image: url('background.jpg'); /* 替换为您的背景图片 */-->
+<!--            background-size: cover;-->
+<!--            background-repeat: no-repeat;-->
+<!--            background-attachment: fixed;-->
+<!--            font-family: 'Arial', sans-serif;-->
+<!--        }-->
+<!--        .form-container {-->
+<!--            background-color: rgba(255, 255, 255, 0.8);-->
+<!--            padding: 20px;-->
+<!--            border-radius: 10px;-->
+<!--            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);-->
+<!--            max-width: 400px;-->
+<!--            margin: 50px auto;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+
+
+<!--    <div class="form-container animate__animated animate__fadeIn">-->
+<!--        <h2 class="text-center mb-4">注册</h2>-->
+<!--        <form method="post">-->
+<!--            <div class="form-group">-->
+<!--                <label for="name">姓名</label>-->
+<!--                <input type="text" class="form-control" id="name" name="name" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="gender">性别</label>-->
+<!--                <select class="form-control" id="gender" name="gender" required>-->
+<!--                    <option value="男">男</option>-->
+<!--                    <option value="女">女</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="age">年龄</label>-->
+<!--                <input type="number" class="form-control" id="age" name="age" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="phone">电话</label>-->
+<!--                <input type="text" class="form-control" id="phone" name="phone" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="email">邮箱</label>-->
+<!--                <input type="email" class="form-control" id="email" name="email" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="password">密码</label>-->
+<!--                <input type="password" class="form-control" id="password" name="password" required>-->
+<!--            </div>-->
+<!--            <button type="submit" class="btn btn-primary btn-block">注册</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <!-- 引入Bootstrap和animate.css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- 自定义样式 -->
+    <style>
+        body {
+            background-image: url('/static/background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Arial', sans-serif;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            margin: 50px auto;
+        }
+        .btn-primary {
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container animate__animated animate__fadeIn">
+        <h2 class="text-center mb-4">注册</h2>
+        <form method="post">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">注册</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+[
+{
+  "directory": "E:/Software/Code_progarm/qt/build",
+  "command": "E:\\Software\\Qt\\Qt5.12.12\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB @CMakeFiles/mangemen.dir/includes_CXX.rsp -g -std=gnu++11 -o CMakeFiles\\mangemen.dir\\mangemen_autogen\\mocs_compilation.cpp.obj -c E:\\Software\\Code_progarm\\qt\\build\\mangemen_autogen\\mocs_compilation.cpp",
+  "file": "E:/Software/Code_progarm/qt/build/mangemen_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/mangemen.dir/mangemen_autogen/mocs_compilation.cpp.obj"
+},
+{
+  "directory": "E:/Software/Code_progarm/qt/build",
+  "command": "E:\\Software\\Qt\\Qt5.12.12\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB @CMakeFiles/mangemen.dir/includes_CXX.rsp -g -std=gnu++11 -o CMakeFiles\\mangemen.dir\\src\\main.cpp.obj -c E:\\Software\\Code_progarm\\qt\\src\\main.cpp",
+  "file": "E:/Software/Code_progarm/qt/src/main.cpp",
+  "output": "CMakeFiles/mangemen.dir/src/main.cpp.obj"
+},
+{
+  "directory": "E:/Software/Code_progarm/qt/build",
+  "command": "E:\\Software\\Qt\\Qt5.12.12\\Tools\\mingw730_32\\bin\\g++.exe -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB @CMakeFiles/mangemen.dir/includes_CXX.rsp -g -std=gnu++11 -o CMakeFiles\\mangemen.dir\\src\\mangemen.cpp.obj -c E:\\Software\\Code_progarm\\qt\\src\\mangemen.cpp",
+  "file": "E:/Software/Code_progarm/qt/src/mangemen.cpp",
+  "output": "CMakeFiles/mangemen.dir/src/mangemen.cpp.obj"
+}
+]

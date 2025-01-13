@@ -1,0 +1,3 @@
+E:\Software\CMake\bin\cmake.exe -E rm -f CMakeFiles\mangemen.dir/objects.a
+E:\Software\Qt\Qt5.12.12\Tools\mingw730_32\bin\ar.exe qc CMakeFiles\mangemen.dir/objects.a @CMakeFiles\mangemen.dir\objects1.rsp
+E:\Software\Qt\Qt5.12.12\Tools\mingw730_32\bin\g++.exe -g -mwindows -Wl,--whole-archive CMakeFiles\mangemen.dir/objects.a -Wl,--no-whole-archive -o mangemen.exe -Wl,--out-implib,libmangemen.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\mangemen.dir\linkLibs.rsp

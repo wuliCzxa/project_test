@@ -1,0 +1,91 @@
+{
+	"kind" : "toolchains",
+	"toolchains" : 
+	[
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"E:/Software/Qt/Qt5.12.12/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++",
+						"E:/Software/Qt/Qt5.12.12/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32",
+						"E:/Software/Qt/Qt5.12.12/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward",
+						"E:/Software/Qt/Qt5.12.12/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include",
+						"E:/Software/Qt/Qt5.12.12/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include-fixed",
+						"E:/Software/Qt/Qt5.12.12/Tools/mingw730_32/i686-w64-mingw32/include"
+					],
+					"linkDirectories" : 
+					[
+						"E:/Software/Qt/Qt5.12.12/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0",
+						"E:/Software/Qt/Qt5.12.12/Tools/mingw730_32/lib/gcc",
+						"E:/Software/Qt/Qt5.12.12/Tools/mingw730_32/i686-w64-mingw32/lib",
+						"E:/Software/Qt/Qt5.12.12/Tools/mingw730_32/lib"
+					],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : 
+					[
+						"stdc++",
+						"mingw32",
+						"gcc_s",
+						"gcc",
+						"moldname",
+						"mingwex",
+						"pthread",
+						"advapi32",
+						"shell32",
+						"user32",
+						"kernel32",
+						"iconv",
+						"mingw32",
+						"gcc_s",
+						"gcc",
+						"moldname",
+						"mingwex"
+					]
+				},
+				"path" : "E:/Software/Qt/Qt5.12.12/Tools/mingw730_32/bin/g++.exe",
+				"version" : "7.3.0"
+			},
+			"language" : "CXX",
+			"sourceFileExtensions" : 
+			[
+				"C",
+				"M",
+				"c++",
+				"cc",
+				"cpp",
+				"cxx",
+				"m",
+				"mm",
+				"mpp",
+				"CPP",
+				"ixx",
+				"cppm",
+				"ccm",
+				"cxxm",
+				"c++m"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"implicit" : {},
+				"path" : "E:/Software/Qt/Qt5.12.12/Tools/mingw730_32/bin/windres.exe"
+			},
+			"language" : "RC",
+			"sourceFileExtensions" : 
+			[
+				"rc",
+				"RC"
+			]
+		}
+	],
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}
